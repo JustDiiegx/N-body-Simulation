@@ -73,7 +73,15 @@ Tested with $N = 2000$ bodies over $500$ simulation steps:
 
 ### Build and Run
 
-#### 1. OpenMP Version
+#### 1. Baseline Version
+
+```
+gcc -O3 -fopenmp nbody.c -o nbody -lm
+./nbody <number_of_bodies> <iterations>
+# Example: ./nbody 2000 500
+```
+
+#### 2. OpenMP Version
 
 ```
 gcc -O3 -fopenmp nbodyParallel.c -o nbodyParallel -lm
@@ -81,10 +89,19 @@ gcc -O3 -fopenmp nbodyParallel.c -o nbodyParallel -lm
 # Example: ./nbodyParallel 2000 500
 ```
 
-#### 2. CUDA Version
+#### 3. CUDA Version
 
 ```
-nvcc -O3 nbody_cuda.cu -o nbodyCuda
+# Using the Makefile in the code
+make
 ./nbodyCuda <number_of_bodies> <iterations>
 # Example: ./nbodyCuda 2000 500
+```
+
+#### 4. Raylib version
+
+```
+gcc -fopenmp nbodySimulation.c -o nbodySimulation -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+./nBodySimulation <number_of_bodies>
+# Example: ./nBodySimulation 2000
 ```
